@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+   
+  <input name="file" id="file" type='file'>
+  <img id="image" src="" alt="" srcset=""/>
+     <button id="submit">Submit</button>
+
+
+<script>
+//   let image="";
+  // pre-fill FormData from the form
+      var nuroImage = new Image;
+    document.getElementById("submit").addEventListener
+    ("click",async()=>{
+         const input = document.getElementById('file');
+        let formData = new FormData();
+
+  // add one more field
+  formData.append("file", input.files[0]);
+
+  // send it out
+  let xhr = await new XMLHttpRequest();
+xhr.responseType = "blob";
+  xhr.open("POST", "http://127.0.0.1:8000/impro");
+  xhr.send(formData);
+
+  //xhr.onload = () => {image=xhr.responseText};
+    
+
+
+xhr.onload = function() {
+ document.getElementById("image").attributes["src"].value= URL.createObjectURL(this.response)
+}
+        //document.getElementById("image").attributes["src"].value=image;
+        
+    });
+  
+</script>
+</body>
+
+</html>
